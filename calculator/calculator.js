@@ -37,6 +37,20 @@ function update() {
 // calculate the monthly payment.  The output should be a string
 // that always has 2 decimal places.
 function calculateMonthlyPayment(values) {
+  for (let value in values) {
+    if (isNaN(`${values[value]}`)) {
+      throw new Error('Number is expected!');
+    }
+  }
+  // if (values.amount < 1) {
+
+  // }
+  // if (!Number.isInteger(values.years)) {
+  //   throw new Error('Years should be a positive integer.');
+  // }
+  // if (values.rate) {
+
+  // }
   return ((values.amount * (values.rate / 12)) / (1 - Math.pow(1 + (values.rate / 12), (values.years * 12) * -1))).toFixed(2);
 }
 

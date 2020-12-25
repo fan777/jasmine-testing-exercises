@@ -1,14 +1,12 @@
-
-
-describe('calculateMonthlyPayment tests', function() {
-  it('should calculate the monthly rate correctly', function () {
+describe('calculateMonthlyPayment output tests', () => {
+  it('should calculate the monthly rate correctly', () => {
     expect(calculateMonthlyPayment({
-        amount: 10000,
+        amount: 20000,
         years: 10,
-        rate: .1
-      })).toEqual('132.15')
+        rate: 0.1
+      })).toEqual('264.30')
   });
-  it("should return a result with 2 decimal places", function() {
+  it('should return a result with 2 decimal places', () => {
     expect(calculateMonthlyPayment({
       amount: 5000,
       years: 10,
@@ -17,3 +15,26 @@ describe('calculateMonthlyPayment tests', function() {
   });
 })
 
+describe('calculateMonthlyPayment input tests', () => {
+  it('should throw error if amount is not a number', () => {
+    expect(() => calculateMonthlyPayment({
+      amount: 'abc',
+      years: 10,
+      rate: 0.1
+    })).toThrowError();
+  })
+  it('should throw error if years is not a number', () => {
+    expect(() => calculateMonthlyPayment({
+      amount: 5000,
+      years: 'abc',
+      rate: 0.1
+    })).toThrowError();
+  })
+  it('should throw error if rate is not a number', () => {
+    expect(() => calculateMonthlyPayment({
+      amount: 5000,
+      years: 10,
+      rate: 'abc'
+    })).toThrowError();
+  })
+})
