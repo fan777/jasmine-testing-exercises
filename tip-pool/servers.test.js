@@ -18,6 +18,7 @@ describe("Servers test (with setup and tear-down)", function() {
     newTr.setAttribute('id', 'server1');
     appendTd(newTr, 'Alice');
     appendTd(newTr, '$0.00');
+    appendDeleteBtn(newTr);
 
     let checkTr;
     for (let server in allServers) {

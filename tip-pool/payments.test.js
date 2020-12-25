@@ -29,15 +29,16 @@ describe('Payments test (with setup and tear-down)', function() {
         appendTd(newTr, '$10');
         appendTd(newTr, '$20');
         appendTd(newTr, '200%');
+        appendDeleteBtn(newTr);
         expect(paymentTbody.querySelector('#payment1')).toEqual(newTr);
     });
     
     it('should update shift summary on updateSummary()', function() {
         submitPaymentInfo();
         let summaryTds = document.querySelectorAll('#summaryTable tbody tr td');
-        expect( summaryTds[0].innerHTML).toEqual('$10');
-        expect( summaryTds[1].innerHTML).toEqual('$20');
-        expect( summaryTds[2].innerHTML).toEqual('200%');
+        expect(summaryTds[0].innerHTML).toEqual('$10');
+        expect(summaryTds[1].innerHTML).toEqual('$20');
+        expect(summaryTds[2].innerHTML).toEqual('200%');
       });
 
     afterEach(function() {
@@ -46,5 +47,6 @@ describe('Payments test (with setup and tear-down)', function() {
             delete allPayments[payment];
             paymentId--;
         }
+        updateSummary();
     })
 })

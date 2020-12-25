@@ -22,9 +22,25 @@ describe('Helpers test (with setup and tear-down)', function() {
         expect(calculateTipPercent(10, 10)).toEqual(100);
     });
 
+    it('should generate td on appendTd(tr, value', function() {
+        let newTr = document.createElement('tr');
+        appendTd(newTr, 'abc');
+
+        expect(newTr.children.length).toEqual(1);
+        expect(newTr.firstChild.innerHTML).toEqual(('abc'));
+    });
+
+    it('should generate delete td on appendDeleteBtn(tr, type', function() {
+        let newTr = document.createElement('tr');
+        appendDeleteBtn(newTr, 'test');
+
+        expect(newTr.children.length).toEqual(1);
+        expect(newTr.firstChild.innerHTML).toEqual('X');
+    });
+
     afterEach(function() {
         for (let payment in allPayments) {
             delete allPayments[payment];
         }
-    })
+    });
 });
