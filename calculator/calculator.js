@@ -23,7 +23,7 @@ function getCurrentUIValues() {
 function setupIntialValues() {
   document.getElementById("loan-amount").value = 10000;
   document.getElementById("loan-years").value = 10;
-  document.getElementById("loan-rate").value = 0.1;
+  document.getElementById("loan-rate").value = 10;
   updateMonthly(calculateMonthlyPayment(getCurrentUIValues()));
 }
 
@@ -42,20 +42,11 @@ function calculateMonthlyPayment(values) {
       throw new Error('Number is expected!');
     }
   }
-  // if (values.amount < 1) {
-
-  // }
-  // if (!Number.isInteger(values.years)) {
-  //   throw new Error('Years should be a positive integer.');
-  // }
-  // if (values.rate) {
-
-  // }
-  return ((values.amount * (values.rate / 12)) / (1 - Math.pow(1 + (values.rate / 12), (values.years * 12) * -1))).toFixed(2);
+  return ((values.amount * ((values.rate / 100) / 12)) / (1 - Math.pow(1 + ((values.rate / 100) / 12), (values.years * 12) * -1))).toFixed(2);
 }
 
 // Given a string representing the monthly payment value,
 // update the UI to show the value.
 function updateMonthly(monthly) {
-  document.getElementById("monthly-payment").innerText = monthly;
+  document.getElementById("monthly-payment").innerText = '$' + monthly;
 }
