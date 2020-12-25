@@ -1,4 +1,4 @@
-describe('Payments test (with setup and tear-down', function() {
+describe('Payments test (with setup and tear-down)', function() {
     beforeEach(function() {
         billAmtInput.value = 10;
         tipAmtInput.value = 20;
@@ -25,17 +25,19 @@ describe('Payments test (with setup and tear-down', function() {
         submitPaymentInfo();
     
         let newTr = document.createElement('tr');
-        newTr.setAttribute('id', 'server1');
-        appendTd(newTr, 'Alice');
-        appendTd(newTr, '$0.00');
+        newTr.setAttribute('id', 'payment1');
+        appendTd(newTr, '$10');
+        appendTd(newTr, '$20');
+        appendTd(newTr, '200%');
+        expect(paymentTbody.querySelector('#payment1')).toEqual(newTr);
+    });
     
-        let checkTr;
-        for (let server in allServers) {
-          if (allServers[server].serverName === 'Alice') {
-            checkTr = serverTbody.querySelector(`#${server}`);
-            expect(checkTr).toEqual(newTr);
-          }
-        }
+    it('should update shift summary on updateSummary()', function() {
+        submitPaymentInfo();
+        let summaryTds = document.querySelectorAll('#summaryTable tbody tr td');
+        expect( summaryTds[0].innerHTML).toEqual('$10');
+        expect( summaryTds[1].innerHTML).toEqual('$20');
+        expect( summaryTds[2].innerHTML).toEqual('200%');
       });
 
     afterEach(function() {
